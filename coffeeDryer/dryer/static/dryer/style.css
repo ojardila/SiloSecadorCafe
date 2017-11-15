@@ -1,0 +1,26 @@
+body {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+h3 {
+  margin-top: 1rem;
+  margin-bottom: 1em;
+
+}
+
+
+fieldset {
+	margin-top: 1em;
+}
+
+hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+#submit {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 1em;
+}

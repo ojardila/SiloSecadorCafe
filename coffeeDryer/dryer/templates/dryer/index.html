@@ -1,0 +1,137 @@
+{% extends 'dryer/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block title %}Simulación para secado de Café{% endblock %}
+{% block content %}
+<p class="lead">Secador de dos pisos</p>
+<form class="form-horizontal">
+  <h3>Parámetros del secador</h3>
+  <div class="row">
+    <div class="col-6 card">
+      <fieldset>
+        <legend>Cámara de secado</legend>
+        <div class="form-group">
+          <label class="col-md-12 control-label" for="area-cam1">Área (M²)</label>  
+          <div class="col-md-12">
+            <input id="area-cam1" name="area-cam1" type="text" placeholder="Área" class="form-control input-md" required="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-12 control-label" for="area-cam1">Contenido de humedad del grano (base húmeda)</label>  
+          <div class="col-md-12">
+            <input id="cont-hum-cam1" name="cont-hum-cam1" type="text" placeholder="Contenido de Humedad del grano" class="form-control input-md" required="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-12 control-label" for="area-cam1">Temperatura del grano (°C)</label>  
+          <div class="col-md-12">
+            <input id="temperature-cam1" name="temperature-cam1" type="text" placeholder="Temperatura inicial del grano" class="form-control input-md" required="">
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <div class="col-6 card">
+      <fieldset>
+        <legend>Cámara de presecado</legend>
+        <div class="form-group">
+          <div class="col-md-12">
+            <label class="checkbox-inline" for="same-data-dryer">
+            <input type="checkbox" name="same-data-dryer" id="same-data-dryer" value="1">
+            Usar los mismos datos de la cámara de secado
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-12 control-label" for="area-cam2">Área (M²)</label>  
+          <div class="col-md-12">
+            <input id="area-cam2" name="area-cam2" type="text" placeholder="Área" class="form-control input-md" required="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-12 control-label" for="area-cam2">Contenido de humedad del grano (base húmeda)</label>  
+          <div class="col-md-12">
+            <input id="cont-hum-cam2" name="cont-hum-cam2" type="text" placeholder="Contenido de Humedad del grano" class="form-control input-md" required="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-12 control-label" for="area-cam2">Temperatura del grano (°C)</label>  
+          <div class="col-md-12">
+            <input id="temperature-cam2" name="temperature-cam2" type="text" placeholder="Temperatura inicial del grano" class="form-control input-md" required="">
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 card">
+      <fieldset>
+        <legend>Condiciones del entorno</legend>
+        <div class="form-group">
+          <label class="col-md-12 control-label" for="area-cam2">Temperatura (°C)</label>  
+          <div class="col-md-12">
+            <input id="temperature" name="temperature" type="text" placeholder="Temperatura" class="form-control input-md" required="">
+            <span class="help-block">Ingrese la temperatura ambiente del lugar de secado</span>  
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-12 control-label" for="area-cam2">Humedad relativa (%)</label>  
+          <div class="col-md-12">
+            <input id="temperature" name="temperature" type="text" placeholder="Humedad relativa" class="form-control input-md" required="">
+            <span class="help-block">Ingrese la humedad relativa del lugar de secado</span>  
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-12 control-label" for="area-cam2">Altitud (m.s.n.m)</label>  
+          <div class="col-md-12">
+            <input id="temperature" name="temperature" type="text" placeholder="Altitud" class="form-control input-md" required="">
+            <span class="help-block">Ingrese la altitud del lugar de secado</span>  
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <div class="col-6 card">
+      <fieldset>
+        <legend>Parámetros de la simulación</legend>
+        <div class="form-group">
+          <label class="col-md-12 control-label" for="flux-cam1">Caudal  (M³/H)</label>  
+          <div class="col-md-12">
+            <input id="flux" name="flux" type="text" placeholder="Caudal" class="form-control input-md" required="">
+            <span class="help-block">Ingrese el valor en metros cúbicos por hora del caudal de aire</span>  
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-12 control-label" for="area-cam2">Espesor de la capa (m)</label>  
+          <div class="col-md-12">
+            <input id="heigh" name="heigh" type="text" placeholder="Espesor de capa en metros" class="form-control input-md" required="">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            <label class="checkbox-inline" for="reverse-flux">
+            <input type="checkbox" name="reverse-flux" id="reverse-flux" value="1">
+            Habilitar inversión de flujo de aire
+            </label>
+          </div>
+        </div>
+        <div class="form-group period-reversing-container" style="display:none">
+          <label class="col-md-12 control-label" for="area-cam2">Periodo de inversión de flujo de aire</label>  
+          <div class="col-md-12">
+            <input id="temperature" name="temperature" type="text" placeholder="Tiempo de inversión en horas" class="form-control input-md">
+          </div>
+        </div>
+        <h6>Condiciones de finalización</h6>
+        <div class="form-group">
+          <label class="col-md-12 control-label" for="area-cam2">Contenido de humedad final esperado</label>  
+          <div class="col-md-12">
+            <input id="temperature" name="chfbs" type="text" placeholder="Contenido de humedad final base seca" class="form-control input-md" required="">
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="row">
+    <button id="submit" type="submit" class="btn btn-primary btn-lg">Simular</button>
+  </div>
+</form>
+</div>
+{% endblock %}

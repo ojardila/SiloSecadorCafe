@@ -1,0 +1,15 @@
+{% extends 'dryer/bootstrap.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block bootstrap4_extra_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'dryer/style.css' %}" />
+<script type="text/javascript" src="{% static 'dryer/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'dryer/main.js' %}"></script>
+{% endblock %}
+{% block bootstrap4_content %}
+<div class="container">
+  <h1>{% block title %}(no title){% endblock %}</h1>
+  {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+  {% block content %}(no content){% endblock %}
+</div>
+{% endblock %}
