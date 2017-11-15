@@ -7,26 +7,26 @@ from classes.enviroment import Enviroment
 
 ############################################
 #Dryer Properties
-number_of_cameras = 1
-number_of_layers = 3
+number_of_cameras = 2
+number_of_layers = 2
 delta_time = 1
 
 #Enviroment conditions
-temperature = 40.1
-humidity = 26
+temperature = 51.4
+humidity = 16
 altitude =  1250
 
 #Initial conditions
-initial_humitiy_content = 40.2
-initial_bean_temperature = 21
-height_layer = 0.4
+initial_humitiy_content = 55.1
+initial_bean_temperature = 22.0
+height_layer = 0.13
 
 #Output conditions conditions
-time = 60
-final_humidity_content = 12
+time = 60.0
+final_humidity_content = 11.6
 
 #Dryer parameters
-air_flow = 456
+air_flow = 2098.8
 area = 1
 
 flow_direction =  "asc" #can be desc

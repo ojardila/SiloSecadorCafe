@@ -7,7 +7,7 @@ import pdb
 class Dryer:
   cameras = [None] * 0
   enviroment = None
-  number_of_layers = 3
+  number_of_layers = 1
   number_of_cameras = 1
   initial_humitiy_content = 0
   initial_bean_temperature = 0
@@ -48,25 +48,25 @@ class Dryer:
   	self.enviroment = enviroment
   
   def setInitialHumidityContent(self, humidity):
-    self.initial_humitiy_content = humidity
+    self.initial_humitiy_content = float(humidity)
 
   def setInitialBeanTemperature(self, temperature):
-    self.initial_bean_temperature = temperature
+    self.initial_bean_temperature = float(temperature)
     
   def setHeightLayer(self, height):
-    self.height_layer = height
+    self.height_layer = float(height)
 
   def setAirFlow(self,q):
-    self.air_flow = q
+    self.air_flow = float(q)
 
   def setArea(self, area):
-    self.area = area
+    self.area = float(area)
 
   def setTime(self, time):
-    self.time = time
+    self.time = float(time)
 
   def setDeltaTime(self, time):
-    self.delta_time = time
+    self.delta_time = float(time)
 
   def airFowReverseTime(self, time):
     self.air_flow_reverse_time = time
@@ -77,10 +77,20 @@ class Dryer:
   def simulateWithThompson(self, layer):
     thompson = Thompson()
     thompson.simulate(layer, self)
+
   def reverseFlowAir(self,):
     self.reverse_time = 0
+    if(len(self.cameras) > 0):
+      self.cameras[0].ReverseAirFlux()
+    #self.cameras = self.cameras[::-1]
+
+  def removeCamera(self, cam):
+    index = 0
     for camera in self.cameras:
-      camera.ReverseAirFlux()
+      if camera == cam:
+        del self.cameras[index]
+      index += 1
+      
 
   def setFlowDirection(self, direction):
     self.flow_direction = direction
@@ -116,7 +126,10 @@ class Dryer:
     for camera in self.cameras:
       camera.calculateHumidityAverage()
       humidity += camera.humidity_content_average
-    return (humidity / (len(self.cameras)))
+    if humidity:
+      return humidity / len(self.cameras)
+    else:
+      return 0
 
 
   def initialize(self, ):
@@ -141,8 +154,9 @@ class Dryer:
 
   def on(self,):
     self.initialize()
-    while(self.getHumidityAverage() >= self.final_humidity_content or self.getHumidityAverage() == 0):
-
+    stop = False
+    while(self.getHumidityAverage() >= self.final_humidity_content or self.getHumidityAverage() == 0 and stop==False):
+      print '========================'
       print 'Time:' + str(self.clock)
       for camera in self.getCameras():
         print camera
@@ -151,16 +165,24 @@ class Dryer:
           print str(layer.humidity_content_bs)
         camera.calculateHumidityAverage()
         print 'CHPROM Camera ' + str(camera.humidity_content_average)
-        
+        if camera.humidity_content_average < self.final_humidity_content:
+          self.removeCamera(camera)
+          self.reverse_time = 0
+          self.reverseFlowAir()
+          print ''' TERMINA CAMARA SECADO '''
+
+        print '=='
       print 'CHPROM Dryer ' + str(self.getHumidityAverage())
       
           #Flow Direction reverse ?
       if(self.reverse_time > 0  and self.reverse_time == self.air_flow_reverse_time ):
         print 'Flux AIR Reverse'
-        self.reverseFlowAir()  
-
-      self.cameras[0].layers[0].setHumidity(self.enviroment.humidity/100)    
-      self.cameras[0].layers[0].setTemperature(self.enviroment.temperature)    
+        self.reverseFlowAir()
+      if(len(self.cameras) == 0):
+        stop=True
+      else:
+        self.cameras[0].layers[0].setHumidity(self.enviroment.humidity/100)    
+        self.cameras[0].layers[0].setTemperature(self.enviroment.temperature)    
 
 
 
