@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from dryer import views
+
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', include('dryer.urls')),
+    url(r'^$', views.index, name='index'),
+    url(r'^simulate/', views.simulate, name='simulate'),
 ]

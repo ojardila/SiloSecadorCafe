@@ -1,0 +1,49 @@
+{% extends 'dryer/base.html' %}
+{% load bootstrap4 %}
+{% load bootstrap4 %}
+{% load static %}
+{% block title %}Resultados simulación para secado de Café{% endblock %}
+{% block content %}
+{% load template_filters %}
+
+<h3>Contenidos de humedad</h3>
+ <table class="table">
+  <thead>
+    <tr>
+        <th scope="col">Hora</th>
+
+      {% for camera in dryer.cameras %}
+        <th scope="col" style="text-align:center;" colspan={{ colspan_layers }} >Camara # {{ forloop.counter }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+	<tr>
+	<td>-</td>
+	{% for camera in dryer.cameras %}
+
+	{% for layer in camera.layers %}
+
+	<td>Capa # {{ forloop.counter }}</td>
+
+	{% endfor %}
+	<td>Promedio</td>
+
+	{% endfor %}
+
+	</tr>
+	 {% for key, values in dryer.humidity_stat_layer.items %}
+	   <tr>
+         <th scope="row">{{ key }}</th>
+		{% for key2, values2 in values.items %}
+		  {% for key3, values3 in values2.items %}
+		    <td>{{ values3|default:"" }}</td> 
+		  {% endfor %}
+		  <td>{{dryer.humidity_stat_average|get_item:key|get_item:key2|default:""}}</td>
+		{% endfor %}
+       </tr>
+	 {% endfor %}
+
+  </tbody>
+</table>  
+{% endblock %}

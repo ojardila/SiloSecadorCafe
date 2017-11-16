@@ -1,10 +1,11 @@
 {% extends 'dryer/base.html' %}
 {% load bootstrap4 %}
+{% load bootstrap4 %}
 {% load static %}
 {% block title %}Simulación para secado de Café{% endblock %}
 {% block content %}
 <p class="lead">Secador de dos pisos</p>
-<form class="form-horizontal">
+<form class="form-horizontal" action="{% url 'simulate' %}" method="GET">
   <h3>Parámetros del secador</h3>
   <div class="row">
     <div class="col-6 card">
@@ -67,23 +68,23 @@
       <fieldset>
         <legend>Condiciones del entorno</legend>
         <div class="form-group">
-          <label class="col-md-12 control-label" for="area-cam2">Temperatura (°C)</label>  
+          <label class="col-md-12 control-label" for="temperature">Temperatura (°C)</label>  
           <div class="col-md-12">
             <input id="temperature" name="temperature" type="text" placeholder="Temperatura" class="form-control input-md" required="">
             <span class="help-block">Ingrese la temperatura ambiente del lugar de secado</span>  
           </div>
         </div>
         <div class="form-group">
-          <label class="col-md-12 control-label" for="area-cam2">Humedad relativa (%)</label>  
+          <label class="col-md-12 control-label" for="humidity">Humedad relativa (%)</label>  
           <div class="col-md-12">
-            <input id="temperature" name="temperature" type="text" placeholder="Humedad relativa" class="form-control input-md" required="">
+            <input id="humidity" name="humidity" type="text" placeholder="Humedad relativa" class="form-control input-md" required="">
             <span class="help-block">Ingrese la humedad relativa del lugar de secado</span>  
           </div>
         </div>
         <div class="form-group">
-          <label class="col-md-12 control-label" for="area-cam2">Altitud (m.s.n.m)</label>  
+          <label class="col-md-12 control-label" for="altitude">Altitud (m.s.n.m)</label>  
           <div class="col-md-12">
-            <input id="temperature" name="temperature" type="text" placeholder="Altitud" class="form-control input-md" required="">
+            <input id="altitude" name="altitude" type="text" placeholder="Altitud" class="form-control input-md" required="">
             <span class="help-block">Ingrese la altitud del lugar de secado</span>  
           </div>
         </div>
@@ -100,9 +101,15 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-md-12 control-label" for="area-cam2">Espesor de la capa (m)</label>  
+          <label class="col-md-12 control-label" for="height">Espesor de la capa (m)</label>  
           <div class="col-md-12">
-            <input id="heigh" name="heigh" type="text" placeholder="Espesor de capa en metros" class="form-control input-md" required="">
+            <input id="height" name="height" type="text" placeholder="Espesor de capa en metros" class="form-control input-md" required="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-12 control-label" for="layers">Cantidad de capas delgadas en cámara</label>  
+          <div class="col-md-12">
+            <input id="layers" name="layers" type="text" placeholder="Número de capas por cámara" class="form-control input-md" required="">
           </div>
         </div>
         <div class="form-group">
@@ -114,18 +121,21 @@
           </div>
         </div>
         <div class="form-group period-reversing-container" style="display:none">
-          <label class="col-md-12 control-label" for="area-cam2">Periodo de inversión de flujo de aire</label>  
+          <label class="col-md-12 control-label" for="reverse-time">Periodo de inversión de flujo de aire</label>  
           <div class="col-md-12">
-            <input id="temperature" name="temperature" type="text" placeholder="Tiempo de inversión en horas" class="form-control input-md">
+            <input id="reverse-time" name="reverse-time" type="text" placeholder="Tiempo de inversión en horas" class="form-control input-md">
           </div>
         </div>
+
+
         <h6>Condiciones de finalización</h6>
         <div class="form-group">
-          <label class="col-md-12 control-label" for="area-cam2">Contenido de humedad final esperado</label>  
+          <label class="col-md-12 control-label" for="reverse-time">Contenido de humedad final esperado</label>  
           <div class="col-md-12">
-            <input id="temperature" name="chfbs" type="text" placeholder="Contenido de humedad final base seca" class="form-control input-md" required="">
+            <input id="chfbs" name="chfbs" type="text" placeholder="Contenido de humedad final base seca" class="form-control input-md" required="">
           </div>
         </div>
+        </div
       </fieldset>
     </div>
   </div>
