@@ -7,6 +7,41 @@
 {% load template_filters %}
 
 <h3>Contenidos de humedad</h3>
+<div class="graphs" id="graphs">
+{% for camera in dryer.cameras %}
+  <div class="chart chartContainer-{{camera.number}}" id="chartContainer-{{camera.number}}">
+  </div>
+{% endfor %}
+<script type="text/javascript">
+    var cameras = { 1:[],2:[]}
+	{% for key, values in dryer.humidity_stat_layer.items %}
+	  {% for key2, values2 in values.items %}
+	    cameras[{{key2}}] = []
+	    {% for key3, values3 in values2.items %}
+	      cameras[{{key2}}][{{key3}}] = []      
+	    {% endfor %}
+	  {% endfor %}
+	{% endfor %}
+
+
+
+	{% for key, values in dryer.humidity_stat_layer.items %}
+	  {% for key2, values2 in values.items %}
+	    {% for key3, values3 in values2.items %}
+	      {% if values3 %}
+	        cameras[{{key2}}][{{key3}}].push({ x: {{key}} ,y: {{values3}} })
+	      {% endif %}
+	    {% endfor %}
+	  {% endfor %}
+	{% endfor %}
+
+	graph(cameras);
+</script>
+
+
+
+</div>
+
  <table class="table">
   <thead>
     <tr>

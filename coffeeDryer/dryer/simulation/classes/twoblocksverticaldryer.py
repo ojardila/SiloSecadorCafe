@@ -14,7 +14,6 @@ class TwoBlocksVerticalDryer(Dryer):
 
           if(camera.getHumidityAverage() > self.final_humidity_content):
             self.simulate(layer, camera)
-            self.registerStadistic(self.clock, layer, camera)
 
           if self.cameras[0].isDone(self):
             self.cameras[1].ReverseAirFlux()

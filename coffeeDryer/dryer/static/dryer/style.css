@@ -24,3 +24,6 @@ hr {
     margin: 0 auto;
     margin-top: 1em;
 }
+.chart {
+  height: 500px !important;
+}
