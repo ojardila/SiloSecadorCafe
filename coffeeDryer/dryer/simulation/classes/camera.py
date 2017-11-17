@@ -3,6 +3,7 @@ class Camera:
   humidity_content_average = 0
   temperature_average = 0
   number = -1
+  area = 0
   
   
   def appendLayer(self, layer):
@@ -13,7 +14,10 @@ class Camera:
   
   def setLayers(self,layers):
   	self.layers = layers
-    
+
+  def setArea(self,area):
+    self.area = area
+
   def isDone(self, dryer):
     return self.getHumidityAverage() < dryer.final_humidity_content
 

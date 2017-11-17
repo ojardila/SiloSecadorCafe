@@ -6,9 +6,12 @@ body {
 h3 {
   margin-top: 1rem;
   margin-bottom: 1em;
+  text-align: center;
 
 }
-
+h1{
+  text-align: center;
+}
 
 fieldset {
 	margin-top: 1em;
@@ -26,4 +29,15 @@ hr {
 }
 .chart {
   height: 500px !important;
+}
+
+#img-dryer {
+    position: fixed;
+    top: 32px;
+    right: 50px;
+    width: 300px;
+}
+.footer {
+  margin-top: 1em;
+  text-align: center;
 }

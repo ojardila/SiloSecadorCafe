@@ -18,7 +18,7 @@ class Thompson:
       chbs = layer.humidity_content_bh / (1 - layer.humidity_content_bh)
       pesp = 365.884 + (2.7067 * 100 * chbs)
       cmsg = pesp * (1 - layer.humidity_content_bh  )
-      capacity = cmsg * float(dryer.height_layer) * float(dryer.area)
+      capacity = cmsg * float(dryer.height_layer) * float(camera.area)
 
       # Simulation
       #Bean air relation

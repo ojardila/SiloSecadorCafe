@@ -12,7 +12,9 @@ jQuery(document).ready(function(){
 
 	});
 
-
+	if('#reverse-flux').is(":checked")) {
+	  jQuery(".period-reversing-container").show();
+	}
 	$('#reverse-flux').change(function() {
 	if($(this).is(":checked")) {
 		jQuery(".period-reversing-container").show();

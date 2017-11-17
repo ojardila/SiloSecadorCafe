@@ -114,6 +114,7 @@ def simulate(request):
       layer.setBeanTemperature(initial_bean_temperature_cam1)
       layers.append(layer)
       camera1.setNumber(1)
+      camera1.setArea(area_cam1)
       camera1.setLayers(layers)
     #Agregar area
 
@@ -129,6 +130,7 @@ def simulate(request):
       layer.setBeanTemperature(initial_bean_temperature_cam2)
       layers.append(layer)
     camera2.setNumber(2)
+    camera2.setArea(area_cam2)
     camera2.setLayers(layers)
     #   #Agregar area
 
