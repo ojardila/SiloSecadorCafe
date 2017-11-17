@@ -35,6 +35,7 @@ def simulate(request):
     air_flow=float()
     final_humidity_content=float()
     reverse_time=float()
+    reverse_flux=False
     num_layers=float()
     
     if 'cont-hum-cam1' in request.GET:
@@ -73,6 +74,9 @@ def simulate(request):
     if 'chfbs' in request.GET:
       final_humidity_content = float(request.GET['chfbs'])
 
+    if 'reverse-flux' in request.GET:
+      reverse_flux = float(request.GET['reverse-flux'])
+
     if 'reverse-time' in request.GET:
       reverse_time = float(request.GET['reverse-time'])
 
@@ -99,7 +103,9 @@ def simulate(request):
     dryer.setFlowDirection("asc")  
     dryer.setArea(area_cam1)
 
-    dryer.airFowReverseTime(reverse_time)
+    if reverse_flux:
+      dryer.enableReverseFlux(reverse_flux)
+      dryer.airFowReverseTime(reverse_time)
     dryer.setFinalHumidityContent(final_humidity_content)
 
     #Camera 1

@@ -22,6 +22,7 @@ class Dryer:
   reverse_time = 1
   humidity_stat_layer = {}
   humidity_stat_average = {}
+  reverse = False
 
 
   temperature_stat_layer = {}
@@ -30,6 +31,9 @@ class Dryer:
 
   def appendCamera(self, camera):
   	self.cameras.append(camera)
+
+  def enableReverseFlux(self, status):
+    self.reverse = status
 
   def setCameras(self,cameras):
   	self.cameras = cameras
@@ -83,7 +87,10 @@ class Dryer:
     self.time = float(time)
 
   def isThereFluxAirReverse(self,):
-    return (self.reverse_time > 0  and self.reverse_time == self.air_flow_reverse_time )
+    if self.reverse:
+      return (self.reverse_time > 0  and self.reverse_time == self.air_flow_reverse_time )
+    else:
+      return False
 
   def setDeltaTime(self, time):
     self.delta_time = float(time)

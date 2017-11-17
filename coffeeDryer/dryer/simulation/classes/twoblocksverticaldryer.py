@@ -16,7 +16,8 @@ class TwoBlocksVerticalDryer(Dryer):
             self.simulate(layer, camera)
 
           if self.cameras[0].isDone(self):
-            self.cameras[1].ReverseAirFlux()
+            if self.reverse:
+              self.cameras[1].ReverseAirFlux()
             self.cameras[1].layers[0].setHumidity(self.enviroment.humidity/100.0)    
             self.cameras[1].layers[0].setTemperature(self.enviroment.temperature)
           else:
